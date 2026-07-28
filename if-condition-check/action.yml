@@ -13,7 +13,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: current (with broken syntax)
+    - name: current (with broken syntax) #this is the current syntax in the sign-release-files action.yml.
       if: ${{ inputs.sign-release-files == 'true' }} && ${{ inputs.gpg-key }} && ${{ inputs.gpg-fingerprint }} && ${{ inputs.gpg-passphrase }}
       run: |
         echo "current (with broken syntax): step ran"
@@ -21,7 +21,7 @@ runs:
     - name: syntax fixed, same operands
       if: inputs.sign-release-files == 'true' && inputs.gpg-key && inputs.gpg-fingerprint && inputs.gpg-passphrase
       run: |
-        echo "syntax fixed, same operands: step ran"
+        echo "syntax fixed — without the curly braces: step ran, but inputs.sign-release-files is not set, so this step is actually skipped"
       shell: bash
     - name: proposed — without if statement, this PR.
       run: |
