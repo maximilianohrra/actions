@@ -1,0 +1,25 @@
+name: Test if-condition behavior
+on: workflow_dispatch
+jobs:
+  fixture:
+    name: Compare the grouped if-condition variants
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./if-condition-check
+        with:
+          gpg-key: dummy
+          gpg-fingerprint: dummy
+          gpg-passphrase: dummy
+
+  validate-real-action:
+    name: Real action fails when an input is empty
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./sign-release-files
+        continue-on-error: true
+        with:
+          gpg-key: ""
+          gpg-fingerprint: dummy
+          gpg-passphrase: dummy

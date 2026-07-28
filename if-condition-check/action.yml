@@ -1,0 +1,29 @@
+name: "If condition check"
+description: "verify if-condition behavior for the sign-release-files PR."
+inputs:
+  gpg-key:
+    description: "Dummy GPG key value."
+    default: ""
+  gpg-fingerprint:
+    description: "Dummy GPG fingerprint value."
+    default: ""
+  gpg-passphrase:
+    description: "Dummy GPG passphrase value."
+    default: ""
+runs:
+  using: "composite"
+  steps:
+    - name: current (with broken syntax)
+      if: ${{ inputs.sign-release-files == 'true' }} && ${{ inputs.gpg-key }} && ${{ inputs.gpg-fingerprint }} && ${{ inputs.gpg-passphrase }}
+      run: |
+        echo "current (with broken syntax): step ran"
+      shell: bash
+    - name: syntax fixed, same operands
+      if: inputs.sign-release-files == 'true' && inputs.gpg-key && inputs.gpg-fingerprint && inputs.gpg-passphrase
+      run: |
+        echo "syntax fixed, same operands: step ran"
+      shell: bash
+    - name: proposed — without if statement, this PR.
+      run: |
+        echo "proposed (no if, this PR): step ran"
+      shell: bash
