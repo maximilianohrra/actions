@@ -17,6 +17,7 @@ runs:
       if: ${{ inputs.sign-release-files == 'true' }} && ${{ inputs.gpg-key }} && ${{ inputs.gpg-fingerprint }} && ${{ inputs.gpg-passphrase }}
       run: |
         echo "current (with broken syntax): step ran"
+        echo "condition: '${{ inputs.sign-release-files == 'true' }}' && '${{ inputs.gpg-key }}' && '${{ inputs.gpg-fingerprint }}' && '${{ inputs.gpg-passphrase }}'"
       shell: bash
     - name: syntax fixed, same operands
       if: inputs.sign-release-files == 'true' && inputs.gpg-key && inputs.gpg-fingerprint && inputs.gpg-passphrase
